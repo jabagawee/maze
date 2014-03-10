@@ -1,0 +1,8 @@
+Inspired by http://tomchuk.com/post/solving-mazes-with-python-3
+
+IDEAS:
+- Cython
+- PyPy
+- Bidirectional A* Search
+- Multiprocessing
+- Throwing more CPU at it
