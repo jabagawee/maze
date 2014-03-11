@@ -4,7 +4,8 @@ from priority_queue import PriorityQueue
 
 class Maze(object):
     def __init__(self, filename):
-        self.image = Image.open(filename).convert("1")
+        self.original = Image.open(filename)
+        self.image = self.original.convert("1")
         self.w, self.h = self.image.size
         self.pixels = self.image.load()
         self.start, self.end = self.endpoints()
