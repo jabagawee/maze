@@ -1,11 +1,9 @@
 import heapq
 
 class PriorityQueue(object):
-    REMOVED = 'REMOVED'
-
     def __init__(self):
         self.heap = []
-        self.exists = dict()
+        self.exists = set()
 
     def __bool__(self):
         return len(self.heap) != 0
@@ -15,15 +13,12 @@ class PriorityQueue(object):
 
     def push(self, item, priority):
         if item in self.exists:
-            entry = self.exists.pop(item)
-            entry[0] = self.REMOVED
-        entry = [item, priority]
-        self.exists[item] = entry
-        heapq.heappush(self.heap, entry)
+            self.heap.remove(item)
+            heapq.heapify(self.heap)
+        self.exists.add(item)
+        heapq.heappush(self.heap, (item, priority))
 
     def pop(self):
-        while self.heap:
-            item, priority = heapq.heappop(self.heap)
-            if item is not self.REMOVED:
-                del self.exists[item]
-                return item, priority
+        item, priority = heapq.heappop(self.heap)
+        self.exists.remove(item)
+        return item, priority
